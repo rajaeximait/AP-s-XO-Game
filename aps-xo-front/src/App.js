@@ -61,8 +61,13 @@ function App() {
 
       <h1>AP's XO Game</h1>
 
+      {/* generate 3x3 board */}
       <Board gameState={gameState} handleCellClick={handleCellClick} />
+
+      {/* checking status */}
       <Status winner={winner} draw={draw} currentPlayer={currentPlayer} startStatus={startStatus} />
+      
+      {/* to controll the start and reset options */}
       <Controls startGame={startGame} resetGame={resetGame} startStatus={startStatus} resetStatus={resetStatus} />
 
     </div>

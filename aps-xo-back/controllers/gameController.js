@@ -1,3 +1,4 @@
+// set initial grid values
 let gameState = [
     ["", "", ""],
     ["", "", ""],
@@ -5,6 +6,7 @@ let gameState = [
 ];
 let currentPlayer = "X";
 
+// reset the current grid values
 function resetGame() {
     gameState = [
         ["", "", ""],
@@ -14,22 +16,27 @@ function resetGame() {
     currentPlayer = "X";
 }
 
+// to check the win condition
 function checkWinner(board) {
     const winConditions = [
-        [board[0][0], board[0][1], board[0][2]],
-        [board[1][0], board[1][1], board[1][2]],
-        [board[2][0], board[2][1], board[2][2]],
-        [board[0][0], board[1][0], board[2][0]],
-        [board[0][1], board[1][1], board[2][1]],
-        [board[0][2], board[1][2], board[2][2]],
-        [board[0][0], board[1][1], board[2][2]],
-        [board[2][0], board[1][1], board[0][2]]
+        // Rows
+        [[0, 0], [0, 1], [0, 2]],
+        [[1, 0], [1, 1], [1, 2]],
+        [[2, 0], [2, 1], [2, 2]],
+        // Columns
+        [[0, 0], [1, 0], [2, 0]],
+        [[0, 1], [1, 1], [2, 1]],
+        [[0, 2], [1, 2], [2, 2]],
+        // Diagonals
+        [[0, 0], [1, 1], [2, 2]],
+        [[2, 0], [1, 1], [0, 2]]
     ];
     return winConditions.some(condition =>
-        condition.every(cell => cell === currentPlayer)
+        condition.every(([row, col]) => board[row][col] === currentPlayer)
     );
 }
 
+// to check game draw
 function checkDraw(board) {
     return board.flat().every(cell => cell !== "");
 }
@@ -39,6 +46,7 @@ const startGame = (req, res) => {
     res.json({ gameState, currentPlayer });
 };
 
+// check each click game win,draw or not
 const makeMove = (req, res) => {
     const { row, col } = req.body;
     if (gameState[row][col] === "") {
