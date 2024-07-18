@@ -38,8 +38,8 @@
 * The turn indicator resets to show that it is player X's turn.
 
 ## Dependencies:
-•	Node.js
-•	React
+* Node.js
+* React
 
 ## Technical Details:
 ### 1.	Frontend:
